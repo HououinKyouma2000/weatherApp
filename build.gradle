@@ -16,10 +16,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.13.2'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    runtimeOnly 'org.postgresql:postgresql'
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
-//    testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
