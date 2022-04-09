@@ -37,7 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().and()
-                .authorizeRequests().anyRequest().authenticated()
+                .authorizeRequests()./*anyRequest()*/antMatchers("/main/get-temperature")
+                .hasAnyRole("READ").anyRequest().authenticated()
                 /*.and().authorizeRequests().antMatchers("/", "/registration/add-user").permitAll()*/;
 
     }

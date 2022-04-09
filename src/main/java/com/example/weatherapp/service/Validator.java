@@ -12,16 +12,11 @@ public class Validator {
         this.userRepo = userRepo;
     }
 
-    public boolean isValidName(String name, String password) {
-        if (name.equals("Oybek") && password.equals("123")) {
-            return true;
-        }
-        return false;
-    }
-/*        User user = userRepo.findByUsername(name);
+    public boolean isValidName(String username, String password) {
+        User user = userRepo.findByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
             return true;
         }
         return false;
-    }*/
+    }
 }

@@ -7,13 +7,29 @@ import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class WeatherService {
-
+    private final RestTemplate restTemplate;
     private static final Logger log = LoggerFactory.getLogger(WeatherService.class);
     String errMess = "Unknown error";
 
+    public WeatherService() {
+        this.restTemplate = new RestTemplate();
+    }
+
+    public String getTemperatureFromAPI(String paramQ) {
+        log.info("> getTemperatureFromAPI  with param={}", paramQ);
+        String url = "http://api.weatherapi.com/v1";
+        String apiMethod = "/current.json";
+        String key = "891c577f7c0d470d895182657223003";
+        String fullUrl = url + apiMethod + "?key=" + key + "&q=" + paramQ;
+        String json=null;
+        json = restTemplate.getForObject(fullUrl, String.class);
+        log.info("< getTemperatureFromAPI");
+        return json;
+    }
 
     public RestError getTemperature(String json) {
         log.info("> getTemperature  with Json={}", json);
@@ -24,7 +40,7 @@ public class WeatherService {
             String cityName = location.get("name").getAsString();
             Double tempC = current.get("temp_c").getAsDouble();
             Weather weather = new Weather(cityName, tempC);
-            log.info("< getTemperature" );
+            log.info("< getTemperature");
             return new RestError(weather);
         } catch (NullPointerException e) {
             errMess = "NullPointerException";
